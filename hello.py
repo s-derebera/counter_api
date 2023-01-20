@@ -11,10 +11,15 @@ def hello_world():
 
 @app.route("/counter.json")
 def counter():
-    data =  {"counter": 1}
+    f = open('counter.json')
+    data = json.load(f)
+
+    with open('counter.json', "w") as f:
+        data['counter'] += 1
+        json.dump(data, f)
 
     response = app.response_class(
-        response=json.dumps(data),
+        response=json_flask.dumps(data),
         status=200,
         mimetype='application/json'
     )
