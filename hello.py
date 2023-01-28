@@ -18,5 +18,18 @@ def increase():
         status=counter_response.status,
         mimetype=counter_response.mimetype
     )
-    
+
+    return response
+
+@app.route("/decrease.json")
+def decrease():
+    controller = CounterController()
+    counter_response = controller.decrease()
+
+    response = app.response_class(
+        response=counter_response.response,
+        status=counter_response.status,
+        mimetype=counter_response.mimetype
+    )
+
     return response

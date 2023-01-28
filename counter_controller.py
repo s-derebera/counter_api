@@ -12,3 +12,13 @@ class CounterController:
             status=200,
             mimetype='application/json'
         )
+
+    def decrease(self):
+        counter_model = CounterModel()
+        response = counter_model.decrease()
+
+        return CounterResponse(
+            response=json_flask.dumps(response),
+            status=200,
+            mimetype='application/json'
+        )
