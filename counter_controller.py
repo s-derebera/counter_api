@@ -1,7 +1,14 @@
-import json
+from flask import json as json_flask
 from counter_model import CounterModel
+from counter_response import CounterResponse
 
 class CounterController:
     def increase(self):
         counter_model = CounterModel()
-        return counter_model.increase()
+        response = counter_model.increase()
+
+        return CounterResponse(
+            response=json_flask.dumps(response),
+            status=200,
+            mimetype='application/json'
+        )

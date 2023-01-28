@@ -1,5 +1,4 @@
 from flask import Flask
-from flask import json as json_flask
 from counter_controller import CounterController
 
 app = Flask(__name__)
@@ -12,11 +11,12 @@ def hello_world():
 @app.route("/increase.json")
 def increase():
     controller = CounterController()
+    counter_response = controller.increase()
 
     response = app.response_class(
-        response=json_flask.dumps(controller.increase()),
-        status=200,
-        mimetype='application/json'
+        response=counter_response.response,
+        status=counter_response.status,
+        mimetype=counter_response.mimetype
     )
     
     return response
