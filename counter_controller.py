@@ -1,12 +1,7 @@
 import json
+from counter_model import CounterModel
 
 class CounterController:
     def increase(self):
-        f = open('counter.json')
-        data = json.load(f)
-
-        with open('counter.json', "w") as f:
-            data['counter'] += 1
-            json.dump(data, f)
-        
-        return data
+        counter_model = CounterModel()
+        return counter_model.increase()
