@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import json as json_flask
-import json
+from counter_controller import CounterController
 
 app = Flask(__name__)
 
@@ -9,17 +9,12 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.route("/counter.json")
-def counter():
-    f = open('counter.json')
-    data = json.load(f)
-
-    with open('counter.json', "w") as f:
-        data['counter'] += 1
-        json.dump(data, f)
+@app.route("/increase.json")
+def increase():
+    controller = CounterController()
 
     response = app.response_class(
-        response=json_flask.dumps(data),
+        response=json_flask.dumps(controller.increase()),
         status=200,
         mimetype='application/json'
     )
