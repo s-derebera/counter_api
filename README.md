@@ -18,5 +18,5 @@ python3 -m venv venv
 To execute run:
 
 ```sh
-$ flask --app hello run
+$ flask --app app run
 ```
